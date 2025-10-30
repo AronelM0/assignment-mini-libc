@@ -1,34 +1,34 @@
-// SPDX-License-Identifier: BSD-3-Clause
-
 #include <string.h>
 
 char *strcpy(char *destination, const char *source)
 {
-   int i;
-   for ( i = 0; source[i] != '\0'; i++) {
-        destination[i] = source[i];
-   }
-   	destination[i] = '\0';
+    int i;
 
-	return destination;
+    for (i = 0; source[i] != '\0'; i++) {
+        destination[i] = source[i];
+    }
+    destination[i] = '\0';
+
+    return destination;
 }
 
 char *strncpy(char *destination, const char *source, size_t len)
-{	
-	int i;
-	for (i = 0; i < len && source[i] != '\0'; i++) {
+{
+    size_t i;
+
+    for (i = 0; i < len && source[i] != '\0'; i++) {
         destination[i] = source[i];
     }
 
-    for ( ; i < len; i++) {
+    for (; i < len; i++) {
         destination[i] = '\0';
     }
-	return destination;
+    return destination;
 }
 
 char *strcat(char *destination, const char *source)
 {
-	int i = 0;
+    int i = 0;
     int j = 0;
 
     while (destination[i] != '\0') {
@@ -43,13 +43,12 @@ char *strcat(char *destination, const char *source)
     destination[i] = '\0';
 
     return destination;
-	
 }
 
 char *strncat(char *destination, const char *source, size_t len)
 {
-	int i = 0;
-    int j = 0; 
+    int i = 0;
+    size_t j = 0;
 
     while (destination[i] != '\0') {
         i++;
@@ -62,92 +61,85 @@ char *strncat(char *destination, const char *source, size_t len)
     }
 
     destination[i] = '\0';
-	return destination;
+    return destination;
 }
 
 int strcmp(const char *str1, const char *str2)
 {
-	int i = 0;
+    int i = 0;
 
-    while (str1[i] != '\0' && str1[i] == str2[i]) 
+    while (str1[i] != '\0' && str1[i] == str2[i])
         i++;
-       
-    if (str1[i] == str2[i]) 
-        return 0; 
-    
-    else if (str1[i] < str2[i]) 
-        return -1; 
- 
+
+    if (str1[i] == str2[i])
+        return 0;
+    else if (str1[i] < str2[i])
+        return -1;
+
     return 1;
-	
 }
 
 int strncmp(const char *str1, const char *str2, size_t len)
 {
-	int i = 0;
+    size_t i = 0;
 
     while (i < len && str1[i] == str2[i] && str1[i] != '\0') {
         i++;
     }
 
-    if (i == len) 
+    if (i == len)
         return 0;
-    
-    if (str1[i] == str2[i])        
-        return 0; 
-    
-    else if (str1[i] < str2[i]) 
+
+    if (str1[i] == str2[i])
+        return 0;
+    else if (str1[i] < str2[i])
         return -1;
 
-    return 1; 
-    
+    return 1;
 }
 
 size_t strlen(const char *str)
 {
-	size_t i = 0;
+    size_t i = 0;
 
-	for (; *str != '\0'; str++, i++)
-		;
+    for (; *str != '\0'; str++, i++)
+        ;
 
-	return i;
+    return i;
 }
 
 char *strchr(const char *str, int c)
 {
-	int i = 0;
+    int i = 0;
 
     while (str[i] != '\0') {
-        if (str[i] == c) 
+        if (str[i] == c)
             return (char *)&str[i];
 
         i++;
     }
 
+    if (str[i] == c)
+        return (char *)&str[i];
 
-    if (str[i] == c) 
-        return (char *)&str[i]; 
-    
     return NULL;
 }
 
 char *strrchr(const char *str, int c)
 {
-	char *ultima_gasire = NULL;
+    char *ultima_gasire = NULL;
     int i = 0;
 
-    // Parcurgem string-ul
     while (str[i] != '\0') {
-        if (str[i] == c)         
-           ultima_gasire = (char *)&str[i]; 
-        
+        if (str[i] == c)
+            ultima_gasire = (char *)&str[i];
+
         i++;
     }
 
+    if (str[i] == c)
+        ultima_gasire = (char *)&str[i];
 
-    if (str[i] == c) 
-        ultima_gasire = (char *)&str[i]; 
-    
     return ultima_gasire;
 }
 
@@ -155,17 +147,17 @@ char *strstr(const char *haystack, const char *needle)
 {
     int i, j;
 
-    if (needle[0] == '\0') 
+    if (needle[0] == '\0')
         return (char *)haystack;
-    
+
     for (i = 0; haystack[i] != '\0'; i++) {
         for (j = 0; needle[j] != '\0'; j++) {
             if (haystack[i + j] == '\0' || haystack[i + j] != needle[j]) {
-                break; 
+                break;
             }
         }
-        if (needle[j] == '\0') 
-            return (char *)&haystack[i];      
+        if (needle[j] == '\0')
+            return (char *)&haystack[i];
     }
 
     return NULL;
@@ -174,10 +166,11 @@ char *strstr(const char *haystack, const char *needle)
 char *strrstr(const char *haystack, const char *needle)
 {
     int i, j;
-    char *ultima_gasire = NULL; 
+    char *ultima_gasire = NULL;
 
     if (needle[0] == '\0') {
         for (i = 0; haystack[i] != '\0'; i++) {
+            /* Doar parcurgem */
         }
         return (char *)&haystack[i];
     }
@@ -199,40 +192,40 @@ char *strrstr(const char *haystack, const char *needle)
 
 void *memcpy(void *destination, const void *source, size_t num)
 {
-	char *d = (char *)destination;
+    char *d = (char *)destination;
     const char *s = (const char *)source;
-    int i;
+    size_t i;
 
     for (i = 0; i < num; i++) {
         d[i] = s[i];
     }
-	return destination;
+    return destination;
 }
 
 void *memmove(void *destination, const void *source, size_t num)
 {
-	char *d = (char *)destination;
+    char *d = (char *)destination;
     const char *s = (const char *)source;
-    int i;
+    size_t i;
+
     if (d > s) {
         for (i = num; i > 0; i--) {
             d[i - 1] = s[i - 1];
         }
-    }
-    else {
+    } else {
         for (i = 0; i < num; i++) {
             d[i] = s[i];
         }
     }
-    
+
     return destination;
 }
 
 int memcmp(const void *ptr1, const void *ptr2, size_t num)
 {
-	const unsigned char *p1 = (const unsigned char *)ptr1;
+    const unsigned char *p1 = (const unsigned char *)ptr1;
     const unsigned char *p2 = (const unsigned char *)ptr2;
-    int i;
+    size_t i;
 
     for (i = 0; i < num; i++) {
         if (p1[i] != p2[i]) {
@@ -251,7 +244,7 @@ void *memset(void *source, int value, size_t num)
 {
     unsigned char *s = (unsigned char *)source;
     unsigned char v = (unsigned char)value;
-    int i;
+    size_t i;
 
     for (i = 0; i < num; i++) {
         s[i] = v;

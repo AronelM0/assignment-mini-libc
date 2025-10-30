@@ -1,7 +1,7 @@
 /* SPDX-License-Identifier: BSD-3-Clause */
 
 #ifndef __UNISTD_H__
-#define __UNISTD_H__	1
+#define __UNISTD_H__    1
 
 #ifdef __cplusplus
 extern "C" {
@@ -9,6 +9,11 @@ extern "C" {
 
 #include <internal/io.h>
 #include <internal/types.h>
+#include <stddef.h>
+
+#define STDIN_FILENO  0
+#define STDOUT_FILENO 1
+#define STDERR_FILENO 2
 
 #define SEEK_SET 0
 #define SEEK_CUR 1
@@ -21,9 +26,11 @@ off_t lseek(int fd, off_t offset, int whence);
 int truncate(const char *path, off_t length);
 int ftruncate(int fd, off_t length);
 unsigned int sleep(unsigned int seconds);
+ssize_t read(int fd, void *buf, size_t count);
+ssize_t write(int fd, const void *buf, size_t count);
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif
+#endif /* __UNISTD_H__ */
