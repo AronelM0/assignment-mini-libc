@@ -1,7 +1,0 @@
-{
-    "files.associations": {
-        "errno.h": "c",
-        "syscall_list.h": "c",
-        "syscall.h": "c"
-    }
-}
