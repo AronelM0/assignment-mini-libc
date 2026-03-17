@@ -176,3 +176,8 @@ lerna-debug.log
 # System Files
 .DS_Store
 Thumbs.db
+*:Zone.Identifier
+*.o
+*.out
+build/
+src.zip
